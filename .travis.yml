@@ -3,5 +3,7 @@ python:
     - "3.6"
 script: 
     - python -m pytest tests/test1.py
+after_success:
+    - coveralls
 notifications:
 email: false
