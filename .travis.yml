@@ -3,7 +3,7 @@ python:
     - "3.6"
 install:
     - pip install python-coveralls
-    - pip install scipy
+    - pip install --only-binary=scipy scipy
 script: 
     - python -m pytest nep_solvers_test.py
 after_success:
