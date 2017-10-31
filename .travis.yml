@@ -4,6 +4,7 @@ python:
 install:
     - pip install python-coveralls
     - pip install --only-binary=scipy scipy
+    - pip install --only-binary=matplotlib matplotlib
 script: 
     - python -m pytest nep_solvers_test.py
 after_success:
