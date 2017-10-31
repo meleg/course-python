@@ -11,7 +11,7 @@ script:
 #    - python -m pytest src/test_laplaceSolver.py -v --cov=laplace_solver --cov-report=html
 #    - python -m pytest src/SimClass.py -v --cov=SimClass --cov-report=html
 #    - python -m pytest src/laplace_solver.py -v --cov=laplace_solver --cov-report=html
-after_success:
-    - coveralls
+#after_success:
+#    - coveralls
 notifications:
 email: false
