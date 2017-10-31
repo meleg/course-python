@@ -4,7 +4,7 @@ python:
 install:
     - pip install python-coveralls
 script: 
-    - python -m pytest nep_solvers_test.py -v --cov --cov-report=html
+    - python -m pytest tests/test1.py -v --cov --cov-report=html
 after_success:
     - coveralls
 notifications:
