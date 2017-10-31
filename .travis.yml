@@ -1,9 +1,17 @@
 language: python
 python:
-  - "3.5.2"
-# command to install dependencies
+#    - "2.7"
+    - "3.6"
 install:
-  - pip install -r requirements.txt
-# command to run tests
-script:
-  - pytest # or py.test for Python versions 3.5 and below
+    - pip install -r requirements.txt
+    - pip install --only-binary=scipy scipy
+    - pip install --only-binary=matplotlib matplotlib
+script: 
+    - python -m pytest src/ -v --cov --cov-report=html
+#    - python -m pytest src/test_laplaceSolver.py -v --cov=laplace_solver --cov-report=html
+#    - python -m pytest src/SimClass.py -v --cov=SimClass --cov-report=html
+#    - python -m pytest src/laplace_solver.py -v --cov=laplace_solver --cov-report=html
+after_success:
+    - coveralls
+notifications:
+email: false
