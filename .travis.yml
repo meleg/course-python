@@ -2,7 +2,7 @@ language: python
 python:
     - "3.6"
 script: 
-    - python -m pytest tests/test1.py
+    - python -m pytest tests/test1.py -v --cov --cov-report=html
 after_success:
     - coveralls
 notifications:
