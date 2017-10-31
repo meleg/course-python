@@ -29,5 +29,3 @@ def test_dep_iar_companion_comparison():
     l,_=nep_solvers.companinon_solver(P)
     assert abs(l[np.argmin(abs(l))]-ll[np.argmin(abs(ll))])<1e-5, \
     "iar and companion based linearization give different approximations"
-
-test_dep_iar_companion_comparison()
