@@ -4,5 +4,6 @@ python:
 install:
     - pip install -r requirements.txt
 script: 
+    - python3 -m pytest tests/test1.py
 notifications:
 email: false
