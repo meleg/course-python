@@ -1,1 +1,4 @@
-{}
+{
+  "test/nep_solvers_test.py::test_dep_iar_companion_comparison": true,
+  "test/nep_solvers_test.py::test_res_inv": true
+}
