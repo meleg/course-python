@@ -27,5 +27,5 @@ def test_dep_iar_companion_comparison():
     ll=np.asarray(ll)
     P=nep_solvers.generate_pep_approximation(M_dep,10)
     l,_=nep_solvers.companinon_solver(P)
-    assert abs(l[np.argmin(abs(l))]-ll[np.argmin(abs(ll))])<1e-5, \
+    assert abs(l[np.argmin(abs(l))]-2*ll[np.argmin(abs(ll))])<1e-5, \
     "iar and companion based linearization give different approximations"
