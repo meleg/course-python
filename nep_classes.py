@@ -45,7 +45,7 @@ class pep(nep):
     """
     pep is a subclass of nep with as input a three dimensional array containing the coefficients
     """
-    def __init__(self, coeff, companion):
+    def __init__(self, coeff, companion=0):
         if not(type(coeff)==matrix_type):
             raise NotMatrix
         if not(coeff.ndim==3):
