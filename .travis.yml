@@ -7,6 +7,7 @@ install:
     - pip install --only-binary=matplotlib matplotlib
 script:
     - python -m pytest test/nep_solvers_test.py
+    - python -m pytest test/nep_classes_test.py
 after_success:
     - coveralls
 notifications:
