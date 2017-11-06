@@ -43,26 +43,34 @@ class nep:
 
 class pep(nep):
     """
-    pep is a subclass of nep with as input a three dimensional array containing the coefficients
+    pep is a subclass of nep with as
+    input a three dimensional array
+    containing the coefficients.
+
+    coeff:  is a three dimensional array containing
+            the coefficients defining the polynomial
+            eigenvalue problem
+
+    companion:  is a function that provides as output
+                the standard companion linearization
+                of the polynomial eigenvalue problem
     """
-    def __init__(self, coeff, companion=0):
+    def __init__(self, coeff):
         if not(type(coeff)==matrix_type):
             raise NotMatrix
         if not(coeff.ndim==3):
             raise NotTensor
 
         n,n,d=coeff.shape
-        def companion(coeff):
-                n=P.n; d=P.d
-                B=np.zeros(((d-1)*n,(d-1)*n))
-                for j in range(1,d):
-                    B[0:n,(j-1)*n:j*n]=P.coeff[:,:,j]
-                for j in range(1,d-1):
-                    B[j*n:(j+1)*n,(j-1)*n:j*n]=np.eye(n)
-
-                A=np.eye((d-1)*n)
-                A[0:n,0:n]=-coeff[:,:,0]
-                return A,B
+        def companion():
+            B=np.zeros(((d-1)*n,(d-1)*n))
+            for j in range(1,d):
+                B[0:n,(j-1)*n:j*n]=coeff[:,:,j]
+            for j in range(1,d-1):
+                B[j*n:(j+1)*n,(j-1)*n:j*n]=np.eye(n)
+            A=np.eye((d-1)*n)
+            A[0:n,0:n]=-coeff[:,:,0]
+            return A,B
 
         self.coeff=coeff
         self.d=d
