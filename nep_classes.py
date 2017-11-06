@@ -45,35 +45,26 @@ class pep(nep):
     """
     pep is a subclass of nep with as input a three dimensional array containing the coefficients
     """
-    def __init__(self, coeff):
+    def __init__(self, coeff, companion):
         if not(type(coeff)==matrix_type):
             raise NotMatrix
         if not(coeff.ndim==3):
             raise NotTensor
-        self.coeff=coeff
+
         n,n,d=coeff.shape
+        def companion(coeff):
+                n=P.n; d=P.d
+                B=np.zeros(((d-1)*n,(d-1)*n))
+                for j in range(1,d):
+                    B[0:n,(j-1)*n:j*n]=P.coeff[:,:,j]
+                for j in range(1,d-1):
+                    B[j*n:(j+1)*n,(j-1)*n:j*n]=np.eye(n)
+
+                A=np.eye((d-1)*n)
+                A[0:n,0:n]=-coeff[:,:,0]
+                return A,B
+
+        self.coeff=coeff
         self.d=d
         self.n=n
-
-if __name__ == "__main__":
-    n=2;
-    A=np.random.random((n,n))
-    B=np.random.random((n,n))
-    C=np.random.random((n,n))
-
-    def myM(l):
-        return A*l*l+B*l+C
-
-    def myMd(l):
-        return A
-
-    Mynep=nep(myM, myMd)
-    print(Mynep.Meval(2))
-    print(Mynep.Md(1))
-
-    d=3;
-    coeff=np.random.random((n,n,d))
-    myP=pep(coeff)
-    print(myP.coeff[:,:,0])
-    print(myP.coeff[:,:,1])
-    print(myP.coeff[:,:,2])
+        self.companion=companion
