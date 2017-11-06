@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import math
 import nep_solvers
 
-n=40;
+n=40
 A0=np.random.random((n,n))
 A1=np.random.random((n,n))
 

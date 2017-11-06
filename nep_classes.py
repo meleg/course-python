@@ -1,6 +1,8 @@
 """
 module for defining the nep classes
 """
+# clear & clear & python -m pytest test/nep_classes_test.py
+# testing mode
 
 import numpy as np
 import types

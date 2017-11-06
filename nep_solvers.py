@@ -1,6 +1,6 @@
-# module for solving nonlinear eigenvalue problems
+""" module for solving nonlinear eigenvalue problems """
 # testing mode
-# clear & clear & python -m pytest test/nep_solvers_test.py 
+# clear & clear & python -m pytest test/nep_solvers_test.py
 
 import nep_classes
 import numpy as np
