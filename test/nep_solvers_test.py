@@ -1,3 +1,7 @@
+import sys
+import os.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+
 import nep_classes
 import numpy as np
 import scipy.linalg as la
@@ -6,7 +10,7 @@ import matplotlib.pyplot as plt
 import math
 import nep_solvers
 
-n=50;
+n=40;
 A0=np.random.random((n,n))
 A1=np.random.random((n,n))
 
@@ -28,19 +32,24 @@ def test_dep_iar_companion_comparison():
     ll, _=nep_solvers.iar(M_dep,50)
     P=nep_solvers.generate_pep_approximation(M_dep,10)
     l,_=nep_solvers.companinon_solver(P)
-    assert abs(l[np.argmin(abs(l))]-ll[np.argmin(abs(ll))])<1e-5, \
+    diff_iar_comp=abs(l[np.argmin(abs(l))]-ll[np.argmin(abs(ll))])
+    assert diff_iar_comp<1e-5, \
     "iar and companion based linearization give different approximations"
 
 
-# the following function does not work. Fix the eigenvectors extraction in iar
+# check that the residual inverse iteration improve the approximation of the
+# worse eigenpair-approximation computed by iar
 def test_res_inv():
     ll,vv=nep_solvers.iar(M_dep,50)
+    # extract the worse eigenpair approximation
+    k=ll.shape[0]-1;    vv=vv[:,k:k+1]
     print("size",vv.shape)
-    k=ll.shape[0]-1
-    ll=ll[k];    vv=vv[:,k:k+1];    vv.shape=50,1
-    print("size",vv.shape)
+
+    ll=ll[k];
     err_iar=npla.norm(M_dep.Meval(ll).dot(vv))
     l,v=nep_solvers.res_inv(M_dep,sigma=ll,n_iter=10)
     err_res_inv=npla.norm(M_dep.Meval(l).dot(v))
 
-    assert True
+    print("error res_inv",err_res_inv)
+    print("error iar",err_iar)
+    assert err_res_inv<err_iar

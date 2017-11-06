@@ -149,9 +149,10 @@ def iar(MM,m,verbose=0):
             eig_vec.append(W[:n,i:i+1])
 
     eig_val=np.asarray(eig_val)
+    # fix on the eigenvectors extraction since python works row-wise
     eig_vec=np.asarray(eig_vec)
     eig_vec=eig_vec.transpose()
-    print("size eigenvectors",eig_vec.shape)
+    eig_vec.shape=eig_vec.shape[1],eig_vec.shape[2]
     return eig_val,eig_vec
 
 def generate_pep_approximation(nep,d):
