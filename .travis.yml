@@ -2,11 +2,11 @@ language: python
 python:
     - "3.6"
 install:
-    - pip install python-coveralls
-    - pip install --only-binary=scipy scipy
-    - pip install --only-binary=matplotlib matplotlib
+    - pip install pytest
     - pip install pytest-cov
     - pip install coveralls
+    - pip install --only-binary=scipy scipy
+    - pip install --only-binary=matplotlib matplotlib
 script:
     - python -m pytest test/nep_solvers_test.py
     - python -m pytest test/nep_classes_test.py
