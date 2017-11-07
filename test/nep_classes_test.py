@@ -6,13 +6,19 @@ import matplotlib.pyplot as plt
 import math
 import nep_solvers
 
-# easy tests
-def test_zero():
+# zero tests
+def test_zero_nep():
     def zerofun(x): return np.zeros((1,1))
     M_zero=nep_classes.nep(zerofun, zerofun, zerofun)
     assert M_zero.Meval(np.random.random(1))==np.zeros((1,1))
     assert M_zero.Mpeval(np.random.random(1))==np.zeros((1,1))
     assert M_zero.Md(np.random.randint(0,100))==np.zeros((1,1))
+
+def test_zero_pep():
+    coeff=np.zeros((2,2,10))
+    P=nep_classes.pep(coeff)
+    for j in range(10):
+        assert npla.norm(P.coeff[:,:,j]-np.zeros((2,2)))<1e-5
 
 # tests on the polynomial coefficients
 def test_pep_sum_coefficients():
@@ -52,7 +58,6 @@ def test_dep():
             return ((-1)**i)*A1
     # create the nonlinear eigenvalue problem
     M_dep=nep_classes.nep(Meval_dep, Md_dep, Mpeval_dep)
-
     assert npla.norm(M_dep.Meval(0)-A0-A1)<1e-5
     assert npla.norm(M_dep.Meval(1)+np.eye(n)-A0-A1*math.exp(-1))<1e-5
     assert npla.norm(M_dep.Md(1)-M_dep.Mpeval(0))<1e-5
