@@ -45,16 +45,7 @@ def Md_dep(i):
 M_dep=nep_classes.nep(Meval_dep, Md_dep, Mpeval_dep)
 
 # check several known equalities for the dep
-def test_dep_approx_pep():
+def test_dep():
     assert npla.norm(M_dep.Meval(0)-A0-A1)<1e-5
     assert npla.norm(M_dep.Meval(1)+np.eye(n)-A0-A1*math.exp(-1))<1e-5
     assert npla.norm(M_dep.Md(1)-M_dep.Mpeval(0))<1e-5
-
-# convert the polynomial eigenvalue problem to a nep
-P_nep=nep_solvers.pep2nep(M_dep)
-
-# check several known equalities (similar to the previous tests)
-def test_pep2nep_conv():
-    assert npla.norm(P_nep.Meval(0)-A0-A1)<1e-5
-    assert npla.norm(P_nep.Meval(1)+np.eye(n)-A0-A1*math.exp(-1))<1e-5
-    assert npla.norm(P_nep.Md(1)-M_dep.Mpeval(0))<1e-5

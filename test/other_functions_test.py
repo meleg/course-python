@@ -39,3 +39,12 @@ def test_poly_approx():
     assert npla.norm(P_dep.coeff[:,:,2]-A1/2)<1e-5
     assert npla.norm(P_dep.coeff[:,:,3]+A1/6)<1e-5
     assert npla.norm(P_dep.coeff[:,:,4]-A1/24)<1e-5
+
+# convert the polynomial eigenvalue problem to a nep
+P_dep2pep2nep=nep_solvers.pep2nep(P_dep)
+
+# check several known equalities (similar to the previous tests)
+def test_pep2nep_conv():
+    assert npla.norm(P_dep2pep2nep.Meval(0)-A0-A1)<1e-5
+    assert npla.norm(P_dep2pep2nep.Meval(1)+np.eye(n)-A0-A1*math.exp(-1))<1e-5
+    assert npla.norm(P_dep2pep2nep.Md(1)-M_dep.Mpeval(0))<1e-5
