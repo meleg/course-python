@@ -23,7 +23,6 @@ def Mdd_dep(i):
         return -np.eye(n)-A1
     else:
         return ((-1)**i)*A1
-
 M_dep=nep_classes.nep(Meval_dep, Mdd_dep)
 
 # check that the iar and the companion method give at least

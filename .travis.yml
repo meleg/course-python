@@ -8,6 +8,7 @@ install:
 script:
     - python -m pytest test/nep_solvers_test.py
     - python -m pytest test/nep_classes_test.py
+    - python -m pytest test/other_functions_test.py
 after_success:
     - coveralls
 notifications:
