@@ -1,5 +1,5 @@
 # course-python
-Test
+Implementation of a few methods for solving nonlinear eigenvalue problems.
 
 [![Build Status](https://travis-ci.org/meleg/course-python.svg?branch=master)](https://travis-ci.org/meleg/course-python.svg?branch=master)
 
