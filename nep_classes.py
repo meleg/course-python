@@ -1,5 +1,5 @@
 """
-module for defining the nep classes
+module for defining the nep classes ()
 """
 # clear & clear & python -m pytest test/nep_classes_test.py
 # testing mode
